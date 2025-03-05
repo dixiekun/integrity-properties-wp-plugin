@@ -142,19 +142,25 @@ function integrity_render_property_card($attributes) {
 }
 
 // Render callback for property section
-function integrity_render_property_section($attributes, $content) {
-    // Add debugging
-    error_log('Property section render called with content: ' . $content);
-    
+function integrity_render_property_section($attributes) {
     // Default attributes if not set
     $attributes = wp_parse_args($attributes, array(
         'title' => 'Our Communities',
         'description' => 'Integrity Homes takes pride in the commitment to creating not just houses, but beautiful spaces that are thoughtfully designed to enhance your lifestyle.'
     ));
     
-    $wrapper_attributes = get_block_wrapper_attributes([
+    // Get property data
+    $virginia = Integrity_Property_Data::get_property('virginia');
+    $maryland = Integrity_Property_Data::get_property('maryland');
+    
+    // If properties not found, return early
+    if (!$virginia || !$maryland) {
+        return '';
+    }
+    
+    $wrapper_attributes = get_block_wrapper_attributes(array(
         'class' => 'integrity-property-section'
-    ]);
+    ));
     
     ob_start();
     ?>
@@ -167,8 +173,67 @@ function integrity_render_property_section($attributes, $content) {
                 <p class="integrity-property-section__description"><?php echo esc_html($attributes['description']); ?></p>
             <?php endif; ?>
         </div>
+        
         <div class="integrity-property-section__content">
-            <?php echo $content; ?>
+            <!-- Virginia Property Card -->
+            <div class="property-card">
+                <div class="property-card__image-container">
+                    <div class="property-card__featured-img-mask">
+                        <img src="<?php echo esc_url($virginia['featured_image']); ?>" class="property-card__featured-img" alt="<?php echo esc_attr($virginia['name']); ?>">
+                    </div>
+                    <div class="property-card__label"><?php echo esc_html($virginia['community_label']); ?></div>
+                    <img class="property-card__badge" src="<?php echo esc_url($virginia['badge']); ?>" alt="Award Badge">
+                </div>
+                
+                <div class="property-card__price">
+                    Priced from: <?php echo esc_html($virginia['price']); ?>
+                </div>
+                
+                <h3 class="property-card__title"><?php echo esc_html($virginia['name']); ?></h3>
+                
+                <div class="property-card__excerpt">
+                    <?php echo esc_html($virginia['excerpt']); ?>
+                </div>
+                
+                <div class="property-card__address">
+                    <span class="dashicons dashicons-location"></span>
+                    <?php echo esc_html($virginia['address']); ?>
+                </div>
+                
+                <a class="property-card__button" href="https://yourintegrityhome.com/virginia/enclave/" target="_blank">
+                    View Community
+                </a>
+            </div>
+            
+            <!-- Maryland Property Card -->
+            <div class="property-card">
+                <div class="property-card__image-container">
+                    <div class="property-card__featured-img-mask">
+                        <img src="<?php echo esc_url($maryland['featured_image']); ?>" class="property-card__featured-img" alt="<?php echo esc_attr($maryland['name']); ?>">
+                    </div>
+                    <div class="property-card__label"><?php echo esc_html($maryland['community_label']); ?></div>
+                    <img class="property-card__badge" src="<?php echo esc_url($maryland['badge']); ?>" alt="Award Badge">
+                </div>
+                
+                <div class="property-card__price">
+                    Priced from: <?php echo esc_html($maryland['price']); ?>
+                </div>
+                
+                <h3 class="property-card__title"><?php echo esc_html($maryland['name']); ?></h3>
+                
+                <div class="property-card__excerpt">
+                    <?php echo esc_html($maryland['excerpt']); ?>
+                </div>
+                
+                <div class="property-card__address">
+                    <span class="dashicons dashicons-location"></span>
+                    <?php echo esc_html($maryland['address']); ?>
+                </div>
+                
+                <a class="property-card__button" href="https://yourintegrityhome.com/maryland/the-monument/" target="_blank">
+                    View Community
+                </a>
+            </div>
         </div>
     </div>
     <?php

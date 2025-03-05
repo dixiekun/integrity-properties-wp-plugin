@@ -8,19 +8,48 @@ export default function Edit({ attributes, setAttributes }) {
 
     // This would normally come from an API, but we're using window.integrityProperties
     const property = window.integrityProperties?.[propertyType];
-
+    
+    // Create property options array from available properties
+    const propertyOptions = [];
+    
+    if (window.integrityProperties) {
+        for (const [key, prop] of Object.entries(window.integrityProperties)) {
+            propertyOptions.push({
+                label: prop.name,
+                value: key
+            });
+        }
+    }
+    
     if (!property) {
-        return <div {...blockProps}>Property not found</div>;
+        return (
+            <>
+                <InspectorControls>
+                    <PanelBody title="Property Settings">
+                        <SelectControl
+                            label="Property Type"
+                            value={propertyType}
+                            options={propertyOptions.length > 0 ? propertyOptions : [
+                                { label: 'Virginia', value: 'virginia' },
+                                { label: 'Maryland', value: 'maryland' },
+                            ]}
+                            onChange={(value) => setAttributes({ propertyType: value })}
+                        />
+                    </PanelBody>
+                </InspectorControls>
+                <div {...blockProps}>Property not found. Please select a valid property type in the sidebar.</div>
+            </>
+        );
     }
 
     return (
         <>
             <InspectorControls>
-                <PanelBody title="Property Settings">
+                <PanelBody title="Property Settings" initialOpen={true}>
                     <SelectControl
                         label="Property Type"
                         value={propertyType}
-                        options={[
+                        options={propertyOptions.length > 0 ? propertyOptions : [
                             { label: 'Virginia', value: 'virginia' },
                             { label: 'Maryland', value: 'maryland' },
                         ]}
@@ -85,14 +114,13 @@ export default function Edit({ attributes, setAttributes }) {
                     </div>
                 )}
 
-                <a 
-                    href={propertyType === 'maryland' 
-                        ? 'https://yourintegrityhome.com/maryland/the-monument/' 
-                        : 'https://yourintegrityhome.com/virginia/enclave/'}
+                {/* Button with no actual navigation in editor */}
+                <button 
                     className="property-card__button"
+                    onClick={(e) => e.preventDefault()}
                 >
                     View Community
-                </a>
+                </button>
             </div>
         </>
     );

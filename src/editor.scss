@@ -1,3 +1,42 @@
+/* Add these styles to both src/editor.scss and src/style.scss */
+
+.integrity-property-section {
+    width: 100%;
+    min-width: 50rem; /* 800px */
+    max-width: 60rem; /* 960px */
+    padding: 2rem 0;
+    margin: 0 auto;
+    
+    &__header {
+        text-align: center;
+        max-width: 50rem; /* 800px */
+        margin: 0 auto 2rem;
+    }
+    
+    &__title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    &__description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #666;
+    }
+    
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr)); /* 300px */
+        gap: 2rem;
+        padding: 1rem;
+    }
+    
+    @media (max-width: 51.875rem) { /* 830px */
+        min-width: 100%; /* Override on small screens */
+    }
+}
+
+
 .property-card {
     width: min(26rem,100%);
     background: #fff;
@@ -7,6 +46,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Kept in px
     --color-green-dark:#008001;
     --color-green-light:#75C93D;
+
+    /* Add editor-specific styles */
+    &.is-selected,
+    &.has-child-selected {
+        outline: 2px solid #007cba;
+        outline-offset: 2px;
+    }
     
     &__image-container {
         position: relative;
@@ -93,11 +139,27 @@
         text-align: center;
         text-decoration: none;
         font-weight: 500;
+        pointer-events: none;
 
         &:hover {
             background: var(--color-green-dark);
         }
     }
+
+    /* When inside the block editor, make it clear the block is clickable */
+    .editor-styles-wrapper & {
+        cursor: pointer;
+    }
+}
+
+/* Make sure links inside the property card don't interrupt selection */
+.block-editor-block-list__block .property-card a {
+    pointer-events: none;
+}
+
+/* Make sure the InnerBlocks area is selectable */
+.integrity-property-section__content {
+    min-height: 200px;
 }
 
 @media (max-width: 430px) {

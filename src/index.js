@@ -1,10 +1,13 @@
 import { registerBlockType } from '@wordpress/blocks';
-import Edit from './edit';
-import metadata from '../blocks/property-card/block.json';
-import './style.scss';  // If you have this file in src directory
-import './editor.scss'; // If you have this file in src directory
+import PropertyCardEdit from './edit';
+import propertyCardMetadata from '../blocks/property-card/block.json';
+import './style.scss';
+import './editor.scss';
 
-registerBlockType(metadata.name, {
-    edit: Edit,
-    save: () => null, // We'll render this dynamically on the PHP side
+// Import the property section block
+import '../blocks/property-section/index.js';
+
+registerBlockType(propertyCardMetadata.name, {
+    edit: PropertyCardEdit,
+    save: () => null,
 });
