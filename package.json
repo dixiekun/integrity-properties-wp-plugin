@@ -1,0 +1,14 @@
+{
+    "name": "integrity-properties",
+    "version": "1.0.0",
+    "description": "Property listing blocks for WordPress",
+    "scripts": {
+        "build": "wp-scripts build",
+        "start": "wp-scripts start",
+        "format": "wp-scripts format",
+        "lint:js": "wp-scripts lint-js"
+    },
+    "devDependencies": {
+        "@wordpress/scripts": "^26.9.0"
+    }
+}

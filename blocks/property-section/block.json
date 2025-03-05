@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "integrity/property-section",
+    "title": "Property Section",
+    "category": "widgets",
+    "icon": "grid-view",
+    "description": "A section to display property cards",
+    "supports": {
+        "align": ["wide", "full"],
+        "html": false
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Our Communities"
+        },
+        "description": {
+            "type": "string",
+            "default": "Integrity Homes takes pride in the commitment to creating not just houses, but beautiful spaces that are thoughtfully designed to enhance your lifestyle."
+        }
+    },
+    "editorScript": "file:../../build/index.js",
+    "editorStyle": "file:../../build/index.css",
+    "style": "file:../../build/style-index.css"
+}

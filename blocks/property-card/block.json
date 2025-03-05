@@ -1,0 +1,38 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "integrity/property-card",
+    "title": "Property Card",
+    "category": "widgets",
+    "icon": "admin-home",
+    "description": "Display a property listing card",
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "propertyType": {
+            "type": "string",
+            "default": "virginia"
+        },
+        "showBadge": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPrice": {
+            "type": "boolean",
+            "default": true
+        },
+        "showExcerpt": {
+            "type": "boolean",
+            "default": true
+        },
+        "showAddress": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "editorScript": "file:../../build/index.js",
+    "editorStyle": "file:../../build/index.css",
+    "style": "file:../../build/style-index.css"
+}
