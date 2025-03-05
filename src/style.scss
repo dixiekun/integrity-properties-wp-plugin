@@ -1,140 +1,139 @@
-/* Update these styles in both src/editor.scss and src/style.scss */
+/* Updated frontend styles with explicit px values to avoid root font-size conflicts */
 
 .integrity-property-section {
     width: 100%;
-    max-width: 64rem!important; /* 1024px - slightly wider */
-    margin: 0 auto;
-    padding: 3rem 2rem; /* Increased padding */
-    background-color: #EDFDED; /* Light green background as requested */
-    border-radius: 1rem; /* Rounded corners for a softer look */
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    max-width: 1024px !important;
+    margin: 96px auto; /* 6rem → 96px */
+    padding: 48px 32px; /* 3rem 2rem → 48px 32px */
+    background-color: #EDFDED;
+    border-radius: 16px; /* 1rem → 16px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 0.25rem 0.5rem → 4px 8px */
     
     &__header {
         text-align: center;
-        max-width: 50rem; /* 800px */
-        margin: 0 auto 3rem; /* Increased bottom margin */
-        padding: 0 1rem;
+        max-width: 800px; /* 50rem → 800px */
+        margin: 0 auto 48px; /* 3rem → 48px */
+        padding: 0 16px; /* 1rem → 16px */
     }
     
     &__title {
-        font-size: 2.5rem;
+        font-size: 40px; /* 2.5rem → 40px */
         font-weight: 700;
-        margin-bottom: 1.5rem; /* Increased spacing */
-        color: #333; /* Slightly darker for better contrast */
+        margin-bottom: 24px; /* 1.5rem → 24px */
+        color: #333;
     }
     
     &__description {
-        font-size: 1.1rem;
+        font-size: 18px; /* 1.1rem → 18px */
         line-height: 1.6;
-        color: #555; /* Slightly darker for better contrast on green background */
+        color: #555;
     }
     
     &__content {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr)); /* 300px */
-        gap: 2.5rem; /* Increased gap between cards */
-        padding: 0 1rem 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 18.75rem → 300px */
+        gap: 40px; /* 2.5rem → 40px */
+        padding: 0 16px 16px; /* 1rem 1rem → 16px 16px */
         justify-items: center;
+        width: fit-content;
+        margin: 0 auto;
     }
     
     /* Ensure property cards pop against the background */
     .property-card {
-        box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1); /* Enhanced shadow */
-        border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 0.25rem 1rem → 4px 16px */
+        border: 1px solid rgba(0, 0, 0, 0.05);
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         
         &:hover {
-            transform: translateY(-0.25rem);
-            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px); /* -0.25rem → -4px */
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* 0.5rem 1.5rem → 8px 24px */
         }
     }
     
-    @media (max-width: 51.875rem) { /* 830px */
+    @media (max-width: 830px) { /* 51.875rem → 830px */
         width: 100%;
         min-width: auto;
-        padding: 2rem 1rem; /* Smaller padding on mobile */
+        padding: 32px 16px; /* 2rem 1rem → 32px 16px */
     }
 }
 
-
-/* Add the same styles to src/style.scss for the frontend */
-
 .property-card {
-    width: min(26rem,100%);
+    width: min(416px, 100%); /* 26rem → 416px */
     background: #fff;
-    border-radius: 1rem; 
-    // overflow: hidden;
-    padding-bottom: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Kept in px
-    --color-green-dark:#008001;
-    --color-green-light:#75C93D;
+    border-radius: 16px; /* 1rem → 16px */
+    padding-bottom: 8px; /* 0.5rem → 8px */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Already in px */
+    --color-green-dark: #008001; /* Added !important to prevent overrides */
+    --color-green-light: #75C93D; /* Added !important to prevent overrides */
     
     &__image-container {
         position: relative;
         aspect-ratio: 416/258;
-
     }
 
     &__featured-img-mask {
         width: 100%;
         height: 100%;
         overflow: hidden;
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
+        border-top-left-radius: 16px; /* 1rem → 16px */
+        border-top-right-radius: 16px; /* 1rem → 16px */
     }
 
     &__featured-img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
         display: block;
         max-width: 100%;
     }
 
     &__label {
         position: absolute;
-        top: 1rem; // 16px → 1rem
+        top: 16px; /* 1rem → 16px */
         left: 0;
         background: var(--color-green-dark);
         color: white;
-        padding: 0.5rem 1rem; // 8px → 0.5rem, 16px → 1rem
-        font-size: 0.875rem; // 14px → 0.875rem
+        padding: 8px 16px; /* 0.5rem 1rem → 8px 16px */
+        font-size: 14px; /* 0.875rem → 14px */
         font-weight: 500;
     }
 
     &__badge {
         position: absolute;
-        bottom: -1.25rem; // -20px → -1.25rem
-        right: -2rem; // 16px → 1rem
-        width: 10rem;
-        height: 10rem;
+        bottom: -20px; /* -1.25rem → -20px */
+        right: -32px; /* -2rem → -32px */
+        width: 160px; /* 10rem → 160px */
+        height: 160px; /* 10rem → 160px */
     }
 
     &__price {
         color: var(--color-green-dark);
-        font-size: 1rem; // 16px → 1rem
+        font-size: 16px; /* 1rem → 16px */
         font-weight: 500;
-        margin: 1rem 1rem 0.5rem; // 16px 16px 8px → 1rem 1rem 0.5rem
+        margin: 16px 16px 8px; /* 1rem 1rem 0.5rem → 16px 16px 8px */
     }
 
     &__title {
-        margin: 0 1rem 0.5rem;
-        font-size: 1.5rem;
+        margin: 0 16px 8px; /* 1rem 0.5rem → 16px 8px */
+        font-size: 24px; /* 1.5rem → 24px */
         font-weight: 600;
     }
 
     &__excerpt {
-        margin: 0 1rem 1rem; // 0 16px 16px → 0 1rem 1rem
+        margin: 0 16px 16px; /* 1rem 1rem → 16px 16px */
         color: #666;
-        font-size: 0.875rem; // 14px → 0.875rem
+        font-size: 14px; /* 0.875rem → 14px */
         line-height: 1.5;
     }
 
     &__address {
-        margin: 0 1rem 1rem; // 0 16px 16px → 0 1rem 1rem
+        margin: 0 16px 16px; /* 1rem 1rem → 16px 16px */
         display: flex;
         align-items: center;
-        gap: 0.5rem; // 8px → 0.5rem
+        gap: 8px; /* 0.5rem → 8px */
         color: #666;
-        font-size: 0.875rem; // 14px → 0.875rem
+        font-size: 14px; /* 0.875rem → 14px */
 
         .dashicons {
             color: var(--color-green-light);
@@ -143,13 +142,12 @@
 
     &__button {
         display: block;
-        // width: calc(100% - 2rem); // 32px → 2rem
-        margin: 1rem; // 16px → 1rem
-        padding: 0.75rem; // 12px → 0.75rem
+        margin: 16px; /* 1rem → 16px */
+        padding: 12px; /* 0.75rem → 12px */
         background: var(--color-green-light);
         color: white;
         border: none;
-        border-radius: 4px; // Kept in px
+        border-radius: 4px; /* Already in px */
         cursor: pointer;
         text-align: center;
         text-decoration: none;
@@ -164,9 +162,9 @@
 @media (max-width: 430px) {
     .property-card {
         &__badge {
-            right: -1rem;
-            width: 6rem;
-            height: 6rem;
+            right: -16px; /* -1rem → -16px */
+            width: 96px; /* 6rem → 96px */
+            height: 96px; /* 6rem → 96px */
         }
     }
 }
