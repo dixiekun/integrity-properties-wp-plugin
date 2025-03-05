@@ -6,7 +6,8 @@
         "build": "wp-scripts build",
         "start": "wp-scripts start",
         "format": "wp-scripts format",
-        "lint:js": "wp-scripts lint-js"
+        "lint:js": "wp-scripts lint-js",
+        "package": "if not exist integrity-properties-dist mkdir integrity-properties-dist && xcopy /E /I blocks integrity-properties-dist\\blocks && xcopy /E /I build integrity-properties-dist\\build && xcopy /E /I inc integrity-properties-dist\\inc && copy integrity-properties.php integrity-properties-dist\\ && copy README.txt integrity-properties-dist\\ && powershell \"Write-Host 'Creating zip file...' -ForegroundColor Green; Compress-Archive -Path integrity-properties-dist -DestinationPath .\\integrity-properties.zip -Force; Write-Host 'Zip file created at:' -ForegroundColor Green; Resolve-Path .\\integrity-properties.zip\""
     },
     "devDependencies": {
         "@wordpress/scripts": "^26.9.0"
