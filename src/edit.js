@@ -1,6 +1,5 @@
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
-import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
     const { propertyType, showBadge, showPrice, showExcerpt, showAddress } = attributes;
@@ -78,15 +77,17 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
             </InspectorControls>
 
-            <div {...blockProps} className="property-card">
-                <div className="property-card__image-container">
-                    <div className="property-card__featured-img-mask">
-                        <img src={property.featured_image} className="property-card__featured-img" alt={property.name} />
+            <div {...blockProps} className="property-card w-full max-w-md bg-white rounded-2xl shadow-md border border-gray-100 pb-2 transition-transform hover:-translate-y-1 hover:shadow-lg">
+                <div className="relative">
+                    <div className="overflow-hidden rounded-t-2xl">
+                        <img src={property.featured_image} className="w-full object-cover" alt={property.name} />
                     </div>
-                    <div className="property-card__label">{property.community_label}</div>
+                    <div className="absolute top-4 left-0 bg-primary py-2 px-4 text-white text-sm font-medium">
+                        {property.community_label}
+                    </div>
                     {showBadge && (
                         <img 
-                            className="property-card__badge"
+                            className="absolute -bottom-5 -right-8 w-40 h-40"
                             src={property.badge}
                             alt="Award Badge"
                         />
@@ -94,29 +95,29 @@ export default function Edit({ attributes, setAttributes }) {
                 </div>
                 
                 {showPrice && (
-                    <div className="property-card__price">
+                    <div className="text-primary font-medium mx-4 mt-4 mb-2">
                         Priced from: {property.price}
                     </div>
                 )}
 
-                <h3 className="property-card__title">{property.name}</h3>
+                <h3 className="mx-4 mb-2 text-2xl font-semibold">{property.name}</h3>
 
                 {showExcerpt && (
-                    <div className="property-card__excerpt">
+                    <div className="mx-4 mb-4 text-gray-600 text-sm leading-relaxed">
                         {property.excerpt}
                     </div>
                 )}
 
                 {showAddress && (
-                    <div className="property-card__address">
-                        <span className="dashicons dashicons-location"></span>
+                    <div className="flex items-center gap-2 mx-4 mb-4 text-gray-600 text-sm">
+                        <span className="dashicons dashicons-location text-secondary"></span>
                         {property.address}
                     </div>
                 )}
 
                 {/* Button with no actual navigation in editor */}
                 <button 
-                    className="property-card__button"
+                    className="block mx-4 mb-4 py-3 px-4 bg-secondary text-white font-medium rounded transition-colors hover:bg-primary text-center"
                     onClick={(e) => e.preventDefault()}
                 >
                     View Community

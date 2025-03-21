@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles that can't be handled with Tailwind utilities */
+@layer components {
+  /* Dashicons styling */
+  .dashicons {
+    font-family: dashicons;
+    display: inline-block;
+    line-height: 1;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: inherit;
+    text-transform: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    vertical-align: top;
+    text-align: center;
+    transition: color .1s ease-in;
+  }
+  
+  .dashicons-location:before {
+    content: "\f230";
+  }
+
+  /* Editor-specific styles */
+  .property-card.is-selected,
+  .property-card.has-child-selected {
+    @apply outline-2 outline outline-primary outline-offset-2;
+  }
+
+  /* Block editor styles */
+  .block-editor-block-list__block .property-card a {
+    pointer-events: none;
+  }
+
+  /* Make sure the InnerBlocks area is selectable */
+  .integrity-property-section__content {
+    min-height: 200px;
+  }
+}

@@ -1,15 +1,22 @@
 {
     "name": "integrity-properties",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Property listing blocks for WordPress",
     "scripts": {
-        "build": "wp-scripts build",
+        "build": "wp-scripts build && npm run build:css",
         "start": "wp-scripts start",
         "format": "wp-scripts format",
         "lint:js": "wp-scripts lint-js",
-        "package": "if not exist integrity-properties-dist mkdir integrity-properties-dist && xcopy /E /I blocks integrity-properties-dist\\blocks && xcopy /E /I build integrity-properties-dist\\build && xcopy /E /I inc integrity-properties-dist\\inc && copy integrity-properties.php integrity-properties-dist\\ && copy README.txt integrity-properties-dist\\ && powershell \"Write-Host 'Creating zip file...' -ForegroundColor Green; Compress-Archive -Path integrity-properties-dist -DestinationPath .\\integrity-properties.zip -Force; Write-Host 'Zip file created at:' -ForegroundColor Green; Resolve-Path .\\integrity-properties.zip\""
+        "package": "powershell -Command \"Remove-Item -Path integrity-properties-dist -Recurse -Force -ErrorAction SilentlyContinue; mkdir integrity-properties-dist; Copy-Item -Path blocks,build,inc -Destination integrity-properties-dist -Recurse; Copy-Item -Path integrity-properties.php,README.txt,postcss.config.js,tailwind.config.js -Destination integrity-properties-dist; $version = (Get-Content package.json | ConvertFrom-Json).version; Compress-Archive -Path integrity-properties-dist/* -DestinationPath ./integrity-properties-v$version.zip -Force; Write-Host 'Zip file created at:' -ForegroundColor Green; Resolve-Path ./integrity-properties-v$version.zip\"",
+        "build:css": "tailwindcss -i ./src/index.css -o ./build/index.css",
+        "watch:css": "tailwindcss -i ./src/index.css -o ./build/index.css --watch"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^26.9.0"
+        "@tailwindcss/container-queries": "^0.1.1",
+        "@tailwindcss/postcss": "^4.0.15",
+        "@wordpress/scripts": "^26.9.0",
+        "autoprefixer": "^10.4.18",
+        "postcss": "^8.4.35",
+        "tailwindcss": "^3.4.1"
     }
 }
