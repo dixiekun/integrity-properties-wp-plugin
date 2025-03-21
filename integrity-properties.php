@@ -17,9 +17,28 @@ if (!defined('ABSPATH')) {
 // Define plugin constants
 define('INTEGRITY_PROPERTIES_PATH', plugin_dir_path(__FILE__));
 define('INTEGRITY_PROPERTIES_URL', plugin_dir_url(__FILE__));
+define('INTEGRITY_PROPERTIES_VERSION', '1.1.0');
 
 // Property data store
 require_once INTEGRITY_PROPERTIES_PATH . 'inc/property-data.php';
+
+/**
+ * Register activation hook
+ */
+register_activation_hook(__FILE__, 'integrity_properties_activate');
+function integrity_properties_activate() {
+    // Flush rewrite rules and perform any necessary setup
+    flush_rewrite_rules();
+}
+
+/**
+ * Register deactivation hook
+ */
+register_deactivation_hook(__FILE__, 'integrity_properties_deactivate');
+function integrity_properties_deactivate() {
+    // Clean up any settings or temporary data
+    flush_rewrite_rules();
+}
 
 /**
  * Initialize the plugin and register blocks
@@ -369,7 +388,7 @@ function integrity_properties_enqueue_assets() {
         'integrity-properties-style',
         plugin_dir_url(__FILE__) . 'build/index.css',
         [],
-        filemtime(plugin_dir_path(__FILE__) . 'build/index.css')
+        INTEGRITY_PROPERTIES_VERSION
     );
     
     // Admin scripts
@@ -379,7 +398,7 @@ function integrity_properties_enqueue_assets() {
             'integrity-properties-editor-script',
             plugin_dir_url(__FILE__) . 'build/index.js',
             ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'],
-            filemtime(plugin_dir_path(__FILE__) . 'build/index.js'),
+            INTEGRITY_PROPERTIES_VERSION,
             true
         );
 
